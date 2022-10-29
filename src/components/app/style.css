@@ -1,0 +1,98 @@
+html, body {
+  background-color: #fafafa;
+  color: #444;
+}
+
+.app {
+  margin-top: 60px;
+}
+
+.player-name {
+  font-size: 2rem;
+  text-align: right;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;;
+  padding: 2rem;
+}
+
+.player-name-col:last-child .player-name {
+  text-align: left;
+}
+.player-name-col:only-child .player-name {
+  text-align: center;
+}
+
+.deck {
+  margin-bottom: 10px;
+}
+
+.deck.card {
+  border-radius: 2px;
+  text-align: center;
+}
+
+.row.matchup .col:first-child .deck > .row {
+  flex-direction: row-reverse;
+}
+
+.deck-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}
+
+.deck-details .card-title {
+  font-size: larger;
+}
+
+.deck-houses {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  background-color: #eee;
+}
+
+ul.deck-links {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+ul.deck-links li:not(:last-child) {
+  margin-right: 10px;
+}
+
+.house-icon {
+  width: 2.5rem;
+}
+
+.deck-status {
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+  background-color: #eee;
+}
+
+.deck-status--label {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  text-transform: uppercase;
+  font-size: smaller;
+  font-weight: bold;
+}
+
+.deck-input-textarea {
+  height: 150px;
+}
+
+.btn + .btn {
+  margin-left: 3px;
+}
+
+.alert-header {
+  font-weight: bold;
+  display: block;
+}
