@@ -1,6 +1,7 @@
 /**
  * Game
  *  - id?: Game id when one has been assigned
+ *  - recoveryKey?: key to recover this game with a new connection
  *  - players: Players[] with length 0-2
  *  - decks: hash of all decks referenced by player properties
  *  - isThinking: boolean - loading, working, whatever
@@ -8,7 +9,6 @@
  *
  * Player:
  *  - name: string
- *  - recoveryKey: key to recover game as this player with a new connection
  *  - ban?: deck id
  *  - safe?: deck id
  *  - steal?: deck id
