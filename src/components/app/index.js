@@ -9,10 +9,12 @@ const MATCH_INDEXES = [0, 1, 2, 3]
 const INITIAL_GAME_STATE = EMPTY
 
 const submitNameAndDecks = (playerName, playerDecks) => {
+  const url = new URL(window.location.href)
   window.SWINDLE_TETRAD_SOCKET.send(
     JSON.stringify({
       action: 'submit-name-and-decks',
       payload: {
+        gameId: url.searchParams.get('game'),
         name: playerName,
         decks: playerDecks,
       },
@@ -27,13 +29,7 @@ function App() {
     const updateData = JSON.parse(event.data)
     const nextGameState = {
       ...game,
-      id: updateData.game?.id,
-      players: [0, 1]
-        .map((ix) => {
-          return { ...game.players?.[ix], ...updateData.game?.players?.[ix] }
-        })
-        .filter((p) => p.name),
-      decks: { ...game.decks, ...(updateData.game?.decks ?? {}) },
+      ...updateData.game,
     }
     setGame(nextGameState)
   })
