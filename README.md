@@ -22,7 +22,15 @@ REACT_APP_WEBSOCKET_URL=wss://foo.websocketthingy.com/gateway
 ```
 
 Don't feel like it? Tweak the sample states in `./src/services/sample-states.js`
-and replace `EMPTY_STATE` with the sample state you'd like to bootstrap the app with.
+and update your env variables:
+
+```
+# REMOVE THIS ONE
+#REACT_APP_WEBSOCKET_URL= ...
+
+# Set this to your desired state :)
+REACT_APP_GAME_STATE=BAN_SAFE_STEAL
+```
 
 ## Colophon
 

@@ -25,24 +25,24 @@ const BAN_SAFE_STEAL = {
   players: [
     {
       name: 'jtrussell',
-      ban: null,
-      safe: null,
-      steal: null,
+      ban: '55f91cd7-b7f5-4374-94ef-672367de8e7b',
+      safe: '51d2cd8f-aa74-4a9f-9b33-d4a4da9afb39',
+      steal: '5fd54c25-62b3-4a27-a0b0-ae2da6c86d38',
       decks: [
         '4477f8cd-b7f7-40c0-acd5-eb2216a7d100',
         '5763813a-ad47-4d21-a83a-777250d84ba2',
-        '02b05327-a93c-4888-ae26-8e6b96a772b2',
+        '51d2cd8f-aa74-4a9f-9b33-d4a4da9afb39',
         '3af99c32-8e4d-41cc-89be-6f4f621e75cb',
       ],
     },
     {
       name: 'wilki',
-      ban: null,
-      safe: null,
-      steal: null,
+      ban: '5763813a-ad47-4d21-a83a-777250d84ba2',
+      safe: '02b05327-a93c-4888-ae26-8e6b96a772b2',
+      steal: '4477f8cd-b7f7-40c0-acd5-eb2216a7d100',
       decks: [
         '55f91cd7-b7f5-4374-94ef-672367de8e7b',
-        '51d2cd8f-aa74-4a9f-9b33-d4a4da9afb39',
+        '02b05327-a93c-4888-ae26-8e6b96a772b2',
         '7e4794d7-2740-41f6-a66b-cbd95d3b4821',
         '5fd54c25-62b3-4a27-a0b0-ae2da6c86d38',
       ],
