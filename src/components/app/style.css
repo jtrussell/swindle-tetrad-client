@@ -31,6 +31,32 @@ html, body {
   text-align: center;
 }
 
+.deck.card.banned {
+  opacity: 0.6;
+  border: 3px dashed	#e6b8af;
+  background-color: #fefefe;
+}
+
+.deck.card.banned .deck-status {
+  background-color: #f4cccc;
+}
+
+.deck.card.safe {
+  border: 3px solid	#b6d7a8;
+}
+
+.deck.card.safe .deck-status {
+  background-color: #d9ead3;
+}
+
+.deck.card.stolen {
+  border: 3px solid	#b4a7d6;
+}
+
+.deck.card.stolen .deck-status {
+  background-color: #d9d2e9;
+}
+
 .row.matchup .col:first-child .deck > .row {
   flex-direction: row-reverse;
 }

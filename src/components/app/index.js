@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import Deck from '../deck'
 import PlayerNameAndDecksForm from '../name-and-decks-form'
+import { getPlayerDecks } from '../../services/game'
 import * as gameStates from '../../services/sample-states'
 import './style.css'
-
-const MATCH_INDEXES = [0, 1, 2, 3]
 
 const INITIAL_GAME_STATE = process.env.REACT_APP_GAME_STATE
   ? gameStates[process.env.REACT_APP_GAME_STATE]
   : gameStates.EMPTY
+
+const zip = (arr1, arr2) => {
+  return arr1.map((x, ix) => (arr2?.length > ix ? [x, arr2[ix]] : [x]))
+}
 
 const submitNameAndDecks = (playerName, playerDecks) => {
   const url = new URL(window.location.href)
@@ -36,6 +39,10 @@ function App() {
     setGame(nextGameState)
   })
 
+  const myDecks = getPlayerDecks(game, 0)
+  const theirDecks = getPlayerDecks(game, 1)
+  const deckMatchups = zip(myDecks, theirDecks)
+
   return (
     <div className="app">
       <div className="container">
@@ -56,12 +63,9 @@ function App() {
             </div>
           )}
           {game.players?.length > 1 && (
-            <>
-              <div className="col-1"></div>
-              <div className="col player-name-col">
-                <div className="player-name">{game.players[1].name}</div>
-              </div>
-            </>
+            <div className="col player-name-col">
+              <div className="player-name">{game.players[1].name}</div>
+            </div>
           )}
         </div>
 
@@ -80,21 +84,15 @@ function App() {
           </div>
         )}
 
-        {MATCH_INDEXES.map((ix) => (
+        {deckMatchups.map(([myDeck, theirDeck], ix) => (
           <div key={ix} className="row matchup">
-            {game.players?.length > 0 && (
+            <div className="col">
+              <Deck details={myDeck}></Deck>
+            </div>
+            {theirDeck && (
               <div className="col">
-                <Deck details={game.decks[game.players[0].decks[ix]]}></Deck>
+                <Deck details={theirDeck}></Deck>
               </div>
-            )}
-
-            {game.players?.length > 1 && (
-              <>
-                <div className="col-1"></div>
-                <div className="col">
-                  <Deck details={game.decks[game.players[1].decks[ix]]}></Deck>
-                </div>
-              </>
             )}
           </div>
         ))}

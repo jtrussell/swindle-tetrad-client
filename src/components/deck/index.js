@@ -1,24 +1,21 @@
 import HouseIcon from '../house-icon'
 
 function Deck(props) {
-  const { id, name, expansion, houses, status } = props.details
+  const { id, name, expansion, houses, isBanned, isSafe, isStolen } =
+    props.details
 
-  const statusClassName = [
-    'deck-status',
-    'col-sm-1',
-    status,
-    {
-      open: '',
-      safe: 'text-success',
-      stolen: '',
-      banned: 'text-danger',
-    }[status],
-  ].join(' ')
+  const status =
+    (isBanned && 'banned') ||
+    (isSafe && 'safe') ||
+    (isStolen && 'stolen') ||
+    'open'
+
+  const className = ['deck', 'card', status].join(' ')
 
   return (
-    <div className="deck card">
+    <div className={className}>
       <div className="row g-0">
-        <div className={statusClassName}>
+        <div className="deck-status col-sm-1">
           <span className="deck-status--label">{status}</span>
         </div>
         <div className="card-body deck-details col-sm-9">
