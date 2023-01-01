@@ -1,4 +1,8 @@
 const getPlayerDecks = (game, ixPlayer) => {
+  if (!game?.players) {
+    return []
+  }
+
   const player = game.players[ixPlayer]
   if (!player) {
     return []
@@ -54,7 +58,7 @@ const getPlayerDecks = (game, ixPlayer) => {
   })
 
   const selectFor =
-    (!player.ban && 'ban') ||
+    (!opponent.ban && 'ban') ||
     (opponent?.ban && !player.safe && 'safe') ||
     (opponent?.safe && !player.steal && 'steal') ||
     (opponent?.steal && !player.game1 && 'game1') ||

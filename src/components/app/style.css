@@ -33,7 +33,7 @@ html, body {
 
 .deck.card.banned {
   opacity: 0.6;
-  border: 3px dashed	#e6b8af;
+  border: 3px solid	#e6b8af;
   background-color: #fefefe;
 }
 
@@ -79,6 +79,14 @@ html, body {
   background-color: #eee;
 }
 
+.deck-actions {
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 ul.deck-links {
   list-style-type: none;
   display: flex;
@@ -99,16 +107,27 @@ ul.deck-links li:not(:last-child) {
   display: flex;
   justify-content: center;
   border-radius: 2px;
-  background-color: #eee;
+  background-color: #ddd;
 }
 
-.deck-status--label {
+.deck-select-button {
+  border: none;
+  margin: 5px;
+  flex: 1;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+	animation: pulse 5s infinite;
+}
+
+.deck-status--label,
+.deck-select-button--label {
   writing-mode: vertical-lr;
   text-orientation: upright;
   text-transform: uppercase;
   font-size: smaller;
   font-weight: bold;
 }
+
+
 
 .deck-input-textarea {
   height: 150px;
@@ -121,4 +140,18 @@ ul.deck-links li:not(:last-child) {
 .alert-header {
   font-weight: bold;
   display: block;
+}
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		box-shadow: 0 0 0 3px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
 }

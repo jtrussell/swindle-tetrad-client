@@ -27,6 +27,19 @@ const submitNameAndDecks = (playerName, playerDecks) => {
   )
 }
 
+const selectDeck = (gameId, selectFor, deckId) => {
+  window.SWINDLE_TETRAD_SOCKET.send(
+    JSON.stringify({
+      action: 'select-deck',
+      payload: {
+        deck: deckId,
+        gameId,
+        selectFor,
+      },
+    })
+  )
+}
+
 function App() {
   const [game, setGame] = useState(INITIAL_GAME_STATE)
 
@@ -42,6 +55,9 @@ function App() {
   const myDecks = getPlayerDecks(game, 0)
   const theirDecks = getPlayerDecks(game, 1)
   const deckMatchups = zip(myDecks, theirDecks)
+
+  const handleSelect = (selectFor, deckId) =>
+    selectDeck(game.id, selectFor, deckId)
 
   return (
     <div className="app">
@@ -87,11 +103,11 @@ function App() {
         {deckMatchups.map(([myDeck, theirDeck], ix) => (
           <div key={ix} className="row matchup">
             <div className="col">
-              <Deck details={myDeck}></Deck>
+              <Deck details={myDeck} selectDeck={handleSelect}></Deck>
             </div>
             {theirDeck && (
               <div className="col">
-                <Deck details={theirDeck}></Deck>
+                <Deck details={theirDeck} selectDeck={handleSelect}></Deck>
               </div>
             )}
           </div>

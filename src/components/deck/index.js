@@ -1,24 +1,42 @@
 import HouseIcon from '../house-icon'
 
 function Deck(props) {
-  const { id, name, expansion, houses, isBanned, isSafe, isStolen } =
-    props.details
+  const {
+    id,
+    name,
+    expansion,
+    houses,
+    isBanned,
+    isSafe,
+    isStolen,
+    isSelectable,
+    selectFor,
+  } = props.details
 
   const status =
-    (isBanned && 'banned') ||
-    (isSafe && 'safe') ||
-    (isStolen && 'stolen') ||
-    'open'
+    (isBanned && 'banned') || (isSafe && 'safe') || (isStolen && 'stolen') || ''
 
   const className = ['deck', 'card', status].join(' ')
+
+  const handleSelect = () => {
+    props.selectDeck(selectFor, id)
+  }
 
   return (
     <div className={className}>
       <div className="row g-0">
-        <div className="deck-status col-sm-1">
-          <span className="deck-status--label">{status}</span>
+        <div className="deck-actions col-sm-1">
+          {isSelectable && (
+            <button
+              className="btn btn-outline-secondary deck-select-button"
+              onClick={handleSelect}
+            >
+              <span className="deck-select-button--label">Select</span>
+            </button>
+          )}
         </div>
-        <div className="card-body deck-details col-sm-9">
+
+        <div className="card-body deck-details col-sm-8">
           <div className="card-title">{name}</div>
           <div className="card-subtitle text-muted">{expansion}</div>
           <ul className="deck-links">
@@ -44,6 +62,10 @@ function Deck(props) {
           {houses.map((houseId) => (
             <HouseIcon key={houseId} houseId={houseId} />
           ))}
+        </div>
+
+        <div className="deck-status col-sm-1">
+          <span className="deck-status--label">{status}</span>
         </div>
       </div>
     </div>
