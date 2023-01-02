@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Deck from '../deck'
+import Status from '../status'
 import PlayerNameAndDecksForm from '../name-and-decks-form'
 import { getPlayerDecks } from '../../services/game'
 import * as gameStates from '../../services/sample-states'
@@ -99,6 +100,8 @@ function App() {
             </a>
           </div>
         )}
+
+        <Status game={game}></Status>
 
         {deckMatchups.map(([myDeck, theirDeck], ix) => (
           <div key={ix} className="row matchup">

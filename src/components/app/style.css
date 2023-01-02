@@ -53,6 +53,10 @@ html, body {
   border: 3px solid	#b4a7d6;
 }
 
+.deck.card.stolen.preliminary {
+  border-style: dashed;
+}
+
 .deck.card.stolen .deck-status {
   background-color: #d9d2e9;
 }

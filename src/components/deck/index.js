@@ -9,6 +9,7 @@ function Deck(props) {
     isBanned,
     isSafe,
     isStolen,
+    isPreliminarySteal,
     isSelectable,
     selectFor,
   } = props.details
@@ -16,7 +17,12 @@ function Deck(props) {
   const status =
     (isBanned && 'banned') || (isSafe && 'safe') || (isStolen && 'stolen') || ''
 
-  const className = ['deck', 'card', status].join(' ')
+  const className = [
+    'deck',
+    'card',
+    status,
+    isPreliminarySteal && 'preliminary',
+  ].join(' ')
 
   const handleSelect = () => {
     props.selectDeck(selectFor, id)

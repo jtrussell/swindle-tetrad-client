@@ -36,18 +36,6 @@ const getPlayerDecks = (game, ixPlayer) => {
     if (player.deck3 === b) {
       return 1
     }
-    if (player.safe === a) {
-      return -1
-    }
-    if (player.safe === b) {
-      return 1
-    }
-    if (player.steal === a) {
-      return -1
-    }
-    if (player.steal === b) {
-      return 1
-    }
     if (opponent?.ban === a) {
       return 1
     }
@@ -58,30 +46,38 @@ const getPlayerDecks = (game, ixPlayer) => {
   })
 
   const selectFor =
-    (!opponent.ban && 'ban') ||
-    (opponent?.ban && !player.safe && 'safe') ||
-    (opponent?.safe && !player.steal && 'steal') ||
-    (opponent?.steal && !player.game1 && 'game1') ||
-    (opponent?.game1 && !player.game2 && 'game2') ||
-    (opponent?.game2 && !player.game3 && 'game3')
+    (ixPlayer === 1 && !opponent.ban && 'ban') ||
+    (ixPlayer === 0 && opponent?.ban && !player.safe && 'safe') ||
+    (ixPlayer === 1 && player.safe && !opponent?.steal && 'steal') ||
+    (ixPlayer === 0 && opponent?.steal && !player.deck1 && 'deck1') ||
+    (ixPlayer === 0 && opponent?.deck1 && !player.deck2 && 'deck2') ||
+    (ixPlayer === 0 && opponent?.deck2 && !player.deck3 && 'deck3')
 
   return playerDecks.map((deckId) => {
     const isBanned = opponent?.ban === deckId
     const isSafe = player.safe === deckId
-    const isStolen = player.steal === deckId
+
+    const isStolen = player.steal === deckId || opponent?.steal === deckId
+    const isPreliminarySteal =
+      Boolean(player.steal) !== Boolean(opponent?.steal)
 
     let isSelectable = false
 
     if (
       ixPlayer === 0 &&
       !isBanned &&
-      ['safe', 'game1', 'game2', 'game3'].includes(selectFor) &&
-      ![player.game1, player.game2, player.game3].includes(deckId)
+      ['safe', 'deck1', 'deck2', 'deck3'].includes(selectFor) &&
+      ![player.deck1, player.deck2, player.deck3].includes(deckId)
     ) {
       isSelectable = true
     }
 
-    if (ixPlayer === 1 && !isBanned && ['ban', 'steal'].includes(selectFor)) {
+    if (
+      ixPlayer === 1 &&
+      !isBanned &&
+      !isSafe &&
+      ['ban', 'steal'].includes(selectFor)
+    ) {
       isSelectable = true
     }
     return {
@@ -91,6 +87,7 @@ const getPlayerDecks = (game, ixPlayer) => {
       isBanned,
       isSafe,
       isStolen,
+      isPreliminarySteal,
     }
   })
 }
