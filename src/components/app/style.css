@@ -28,41 +28,46 @@ html, body {
 
 .deck.card {
   border-radius: 2px;
+  border: 2px solid #ccc;
   text-align: center;
 }
 
-.deck.card.banned {
+.deck.card.ban {
   opacity: 0.6;
-  border: 3px solid	#e6b8af;
+  border: 2px solid	#e6b8af;
   background-color: #fefefe;
 }
 
-.deck.card.banned .deck-status {
+.deck.card.ban .deck-status {
   background-color: #f4cccc;
 }
 
 .deck.card.safe {
-  border: 3px solid	#b6d7a8;
+  border: 2px solid	#b6d7a8;
 }
 
 .deck.card.safe .deck-status {
   background-color: #d9ead3;
 }
 
-.deck.card.stolen {
-  border: 3px solid	#b4a7d6;
+.deck.card.steal {
+  border: 2px solid	#b4a7d6;
 }
 
-.deck.card.stolen.preliminary {
+.deck.card.steal.preliminary {
   border-style: dashed;
 }
 
-.deck.card.stolen .deck-status {
+.deck.card.steal .deck-status {
   background-color: #d9d2e9;
 }
 
 .row.matchup .col:first-child .deck > .row {
   flex-direction: row-reverse;
+}
+
+.deck-actions__game-number::before {
+  content: "G ";
 }
 
 .deck-details {

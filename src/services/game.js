@@ -56,6 +56,9 @@ const getPlayerDecks = (game, ixPlayer) => {
   return playerDecks.map((deckId) => {
     const isBanned = opponent?.ban === deckId
     const isSafe = player.safe === deckId
+    const isDeck1 = player.deck1 === deckId
+    const isDeck2 = player.deck2 === deckId
+    const isDeck3 = player.deck3 === deckId
 
     const isStolen = player.steal === deckId || opponent?.steal === deckId
     const isPreliminarySteal =
@@ -88,6 +91,9 @@ const getPlayerDecks = (game, ixPlayer) => {
       isSafe,
       isStolen,
       isPreliminarySteal,
+      isDeck1,
+      isDeck2,
+      isDeck3,
     }
   })
 }

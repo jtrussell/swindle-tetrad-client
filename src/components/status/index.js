@@ -25,6 +25,14 @@ function Status(props) {
   const theirSelectFor = theirDecks.find((x) => x.selectFor)?.selectFor
   const selectFor = mySelectFor || theirSelectFor
 
+  if (!myDecks.length || !theirDecks.length) {
+    return null
+  }
+
+  if (game.players?.[0]?.deck3 && game.players?.[1]?.deck3) {
+    return null
+  }
+
   return (
     <div className="game-status">
       {selectFor ? (

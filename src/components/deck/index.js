@@ -12,10 +12,13 @@ function Deck(props) {
     isPreliminarySteal,
     isSelectable,
     selectFor,
+    isDeck1,
+    isDeck2,
+    isDeck3,
   } = props.details
 
   const status =
-    (isBanned && 'banned') || (isSafe && 'safe') || (isStolen && 'stolen') || ''
+    (isBanned && 'ban') || (isSafe && 'safe') || (isStolen && 'steal') || ''
 
   const className = [
     'deck',
@@ -40,6 +43,10 @@ function Deck(props) {
               <span className="deck-select-button--label">Select</span>
             </button>
           )}
+
+          {isDeck1 && <span className="deck-actions__game-number">1</span>}
+          {isDeck2 && <span className="deck-actions__game-number">2</span>}
+          {isDeck3 && <span className="deck-actions__game-number">3</span>}
         </div>
 
         <div className="card-body deck-details col-sm-8">
