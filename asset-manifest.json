@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/swindle-tetrad-client/static/css/main.be3b4705.css",
+    "main.js": "/swindle-tetrad-client/static/js/main.163c5fad.js",
+    "static/media/saurian.png": "/swindle-tetrad-client/static/media/saurian.f9bf41ab44a3007622e5.png",
+    "static/media/brobnar.png": "/swindle-tetrad-client/static/media/brobnar.6102a18bd7b2be4b01f2.png",
+    "static/media/untamed.png": "/swindle-tetrad-client/static/media/untamed.abaf4774d12f318875cf.png",
+    "static/media/sanctum.png": "/swindle-tetrad-client/static/media/sanctum.dff28b95ab1efea1725e.png",
+    "static/media/unfathomable.png": "/swindle-tetrad-client/static/media/unfathomable.da2db688ed474882d07a.png",
+    "static/media/dis.png": "/swindle-tetrad-client/static/media/dis.ffb524d8cf33811307bf.png",
+    "static/media/shadows.png": "/swindle-tetrad-client/static/media/shadows.fcfa09789b021c4b081d.png",
+    "static/media/mars.png": "/swindle-tetrad-client/static/media/mars.e0c04a2cf10d9811185e.png",
+    "static/media/logos.png": "/swindle-tetrad-client/static/media/logos.d8459f140312fedfed7c.png",
+    "static/media/ekwidon.png": "/swindle-tetrad-client/static/media/ekwidon.7a133ace7e960af57d6c.png",
+    "static/media/staralliance.png": "/swindle-tetrad-client/static/media/staralliance.aadbb21e50f3efa6797c.png",
+    "index.html": "/swindle-tetrad-client/index.html",
+    "main.be3b4705.css.map": "/swindle-tetrad-client/static/css/main.be3b4705.css.map",
+    "main.163c5fad.js.map": "/swindle-tetrad-client/static/js/main.163c5fad.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.be3b4705.css",
+    "static/js/main.163c5fad.js"
+  ]
+}
