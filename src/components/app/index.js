@@ -95,7 +95,7 @@ function App() {
               Check over your decks below, then send your opponent this link to
               join the game:
             </div>
-            <a href={'/?game=' + game.id}>
+            <a href={'?game=' + game.id}>
               {window.location.href + '?game=' + game.id}
             </a>
           </div>
