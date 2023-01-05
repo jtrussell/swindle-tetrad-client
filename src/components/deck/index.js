@@ -57,6 +57,8 @@ function Deck(props) {
               <a
                 className="link-info"
                 href={`https://decksofkeyforge.com/decks/${id}`}
+                target="_blank"
+                rel="noreferrer"
               >
                 Decks of KeyForge
               </a>
@@ -65,6 +67,8 @@ function Deck(props) {
               <a
                 className="link-info"
                 href={`https://www.keyforgegame.com/deck-details/${id}`}
+                target="_blank"
+                rel="noreferrer"
               >
                 Master Vault
               </a>
