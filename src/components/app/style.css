@@ -1,17 +1,20 @@
 html, body {
   background-color: #fafafa;
   color: #444;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .app {
-  margin-top: 60px;
+  padding-top: 60px;
 }
 
 .player-name {
   font-size: 2rem;
   text-align: right;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;;
   padding: 2rem;
 }
 
@@ -123,8 +126,6 @@ ul.deck-links li:not(:last-child) {
   border: none;
   margin: 5px;
   flex: 1;
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
-	animation: pulse 5s infinite;
 }
 
 .deck-status--label,
@@ -151,16 +152,15 @@ ul.deck-links li:not(:last-child) {
   display: block;
 }
 
-@keyframes pulse {
-	0% {
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
-	}
+.footer-wrapper {
+  align-items: flex-end;
+}
 
-	70% {
-		box-shadow: 0 0 0 3px rgba(0, 0, 0, 0);
-	}
-
-	100% {
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-	}
+ul.footer {
+  margin-top: 20px;
+  padding: 20px 0 0;
+  border-top: 1px solid #eee;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
 }

@@ -10,7 +10,7 @@ const getWaitingForSelection = (selectFor) => {
     deck3: 'play in game three',
   }[selectFor]
   return (
-    <div className="alert alert-info">
+    <div className="alert alert-info text-center fs-4">
       Select a deck to <b>{selectForDisplay}</b>.
     </div>
   )
@@ -38,7 +38,7 @@ function Status(props) {
       {selectFor ? (
         getWaitingForSelection(selectFor)
       ) : (
-        <div className="alert alert-info">
+        <div className="alert alert-info text-center fs-4">
           Waiting for opponent to make a selection.
         </div>
       )}

@@ -61,8 +61,8 @@ function App() {
     selectDeck(game.id, selectFor, deckId)
 
   return (
-    <div className="app">
-      <div className="container">
+    <div className="app h-100">
+      <div className="container d-flex flex-column h-100">
         {!game.players?.length && (
           <div className="row flex">
             <div className="col-6 ms-auto me-auto">
@@ -87,7 +87,7 @@ function App() {
         </div>
 
         {game.players?.length === 1 && (
-          <div className="alert alert-info">
+          <div className="alert alert-info text-center fs-4">
             <span className="alert-header">
               Welcome, {game.players[0].name}
             </span>
@@ -115,6 +115,31 @@ function App() {
             )}
           </div>
         ))}
+
+        <div className="footer-wrapper flex-grow-1 d-flex">
+          <ul className="footer col">
+            <li>
+              <a
+                href="https://www.thefinalswindle.com/"
+                className="link-info"
+                target="_blank"
+                rel="noreferrer"
+              >
+                The Final Swindle
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.thefinalswindle.com/p/formats.html"
+                className="link-info"
+                target="_blank"
+                rel="noreferrer"
+              >
+                About Tetrad and Other Swindle Formats
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   )
