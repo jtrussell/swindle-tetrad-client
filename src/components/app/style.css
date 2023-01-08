@@ -1,3 +1,7 @@
+* {
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
 html, body {
   background-color: #fafafa;
   color: #444;
@@ -12,16 +16,7 @@ html, body {
 
 .player-name {
   font-size: 2rem;
-  text-align: right;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;;
   padding: 2rem;
-}
-
-.player-name-col:last-child .player-name {
-  text-align: left;
-}
-.player-name-col:only-child .player-name {
   text-align: center;
 }
 
@@ -31,13 +26,35 @@ html, body {
 
 .deck.card {
   border-radius: 2px;
-  border: 2px solid #ccc;
+  border: 3px solid #ccc;
   text-align: center;
+}
+
+.deck.card.selectable {
+  box-shadow: 0 0 6px  #495057;
+}
+
+.deck.card.selectable:hover {
+  cursor: pointer;
+  background-color: #fff3cd;
+  border-color: #a1afbe;
+}
+
+.deck.card.selectable:hover .deck-houses {
+  background-color: #ffe69c;
+}
+
+.deck.card.selectable:hover .deck-status {
+  background-color: #dfbb50;
+}
+
+.deck-status {
+  color: rgba(0, 0, 0, 0.3)
 }
 
 .deck.card.ban {
   opacity: 0.6;
-  border: 2px solid	#e6b8af;
+  border-color:	#e6b8af;
   background-color: #fefefe;
 }
 
@@ -46,7 +63,7 @@ html, body {
 }
 
 .deck.card.safe {
-  border: 2px solid	#b6d7a8;
+  border-color:	#b6d7a8;
 }
 
 .deck.card.safe .deck-status {
@@ -65,7 +82,13 @@ html, body {
   background-color: #d9d2e9;
 }
 
-.row.matchup .col:first-child .deck > .row {
+ul.decks-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.my-decks-list .deck > .row {
   flex-direction: row-reverse;
 }
 
@@ -129,15 +152,16 @@ ul.deck-links li:not(:last-child) {
 }
 
 .deck-status--label,
+.deck-state--game-selection,
 .deck-select-button--label {
-  writing-mode: vertical-lr;
-  text-orientation: upright;
   text-transform: uppercase;
   font-size: smaller;
   font-weight: bold;
 }
 
-
+.deck-status > :not(:first-child)::before {
+  content: " - "
+}
 
 .deck-input-textarea {
   height: 150px;
@@ -161,6 +185,4 @@ ul.footer {
   padding: 20px 0 0;
   border-top: 1px solid #eee;
   list-style-type: none;
-  display: flex;
-  justify-content: space-between;
 }

@@ -20,35 +20,37 @@ function Deck(props) {
   const status =
     (isBanned && 'ban') || (isSafe && 'safe') || (isStolen && 'steal') || ''
 
+  const statusDisplay =
+    {
+      ban: 'banned',
+      safe: 'safe',
+      steal: 'stolen',
+    }[status] || null
+
+  const gameSelectionDisplay =
+    (isDeck1 && 'Game 1') ||
+    (isDeck2 && 'Game 2') ||
+    (isDeck3 && 'Game 3') ||
+    null
+
   const className = [
     'deck',
     'card',
     status,
     isPreliminarySteal && 'preliminary',
+    isSelectable && 'selectable',
   ].join(' ')
 
-  const handleSelect = () => {
+  const handleSelect = (event) => {
+    if (!isSelectable || event.target.tagName === 'A') {
+      return
+    }
     props.selectDeck(selectFor, id)
   }
 
   return (
-    <div className={className}>
+    <div className={className} onClick={handleSelect}>
       <div className="row g-0">
-        <div className="deck-actions col-sm-1">
-          {isSelectable && (
-            <button
-              className="btn btn-outline-secondary deck-select-button"
-              onClick={handleSelect}
-            >
-              <span className="deck-select-button--label">Select</span>
-            </button>
-          )}
-
-          {isDeck1 && <span className="deck-actions__game-number">1</span>}
-          {isDeck2 && <span className="deck-actions__game-number">2</span>}
-          {isDeck3 && <span className="deck-actions__game-number">3</span>}
-        </div>
-
         <div className="card-body deck-details col-sm-8">
           <div className="card-title">{name}</div>
           <div className="card-subtitle text-muted">{expansion}</div>
@@ -75,15 +77,24 @@ function Deck(props) {
             </li>
           </ul>
         </div>
-        <div className="deck-houses col-sm-2">
+        <div className="deck-houses col-sm-2 d-none d-md-flex">
           {houses.map((houseId) => (
             <HouseIcon key={houseId} houseId={houseId} />
           ))}
         </div>
+      </div>
 
-        <div className="deck-status col-sm-1">
-          <span className="deck-status--label">{status}</span>
-        </div>
+      <div className="deck-status">
+        {(statusDisplay || !gameSelectionDisplay) && (
+          <span className="deck-status--label">
+            &nbsp;{statusDisplay}&nbsp;
+          </span>
+        )}
+        {gameSelectionDisplay && (
+          <span className="deck-state--game-selection">
+            {gameSelectionDisplay}
+          </span>
+        )}
       </div>
     </div>
   )
