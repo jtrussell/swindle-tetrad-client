@@ -136,6 +136,15 @@ function App() {
               >
                 The Final Swindle
               </a>
+              <span className="text-black-50 ps-1 pe-1">&times;</span>
+              <a
+                href="https://sloppylabwork.com/"
+                className="link-info"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Sloppy Labwork
+              </a>
             </li>
             <li>
               <a
