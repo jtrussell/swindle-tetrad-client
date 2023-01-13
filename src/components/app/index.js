@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Deck from '../deck'
 import Status from '../status'
 import PlayerNameAndDecksForm from '../name-and-decks-form'
@@ -37,17 +37,59 @@ const selectDeck = (gameId, selectFor, deckId) => {
   )
 }
 
+const recoverGameIfNeeded = (game) => {
+  if (!game.recoveryKey) {
+    const url = new URL(window.location.href)
+    const gameId = url.searchParams.get('game')
+    const recoveryKey = url.searchParams.get('recoveryKey')
+    if (gameId && recoveryKey) {
+      window.SWINDLE_TETRAD_SOCKET.send(
+        JSON.stringify({
+          action: 'recover-game',
+          payload: {
+            gameId,
+            recoveryKey,
+          },
+        })
+      )
+      return true
+    }
+  }
+  return false
+}
+
+const getRecoveryLink = (game) => {
+  const url = window.location.href.replace(/\?.*/, '')
+  return `${url}?game=${game.id}&recoveryKey=${game.recoveryKey}`
+}
+
 function App() {
   const [game, setGame] = useState(INITIAL_GAME_STATE)
 
-  window.SWINDLE_TETRAD_SOCKET.addEventListener('message', (event) => {
-    const updateData = JSON.parse(event.data)
-    const nextGameState = {
-      ...game,
-      ...updateData.game,
+  useEffect(() => {
+    const updateStateOnMessage = (event) => {
+      const updateData = JSON.parse(event.data)
+      const nextGameState = {
+        ...game,
+        ...updateData.game,
+      }
+      setGame(nextGameState)
     }
-    setGame(nextGameState)
+    window.SWINDLE_TETRAD_SOCKET.addEventListener(
+      'message',
+      updateStateOnMessage
+    )
+    return () => {
+      window.SWINDLE_TETRAD_SOCKET.removeEventListener(
+        'message',
+        updateStateOnMessage
+      )
+    }
   })
+
+  if (recoverGameIfNeeded(game)) {
+    return 'Hang on... restarting the Nintendo...'
+  }
 
   const myDecks = getPlayerDecks(game, 0)
   const theirDecks = getPlayerDecks(game, 1)
@@ -124,6 +166,20 @@ function App() {
             </div>
           )}
         </div>
+
+        {game.recoveryKey && (
+          <div className="alert alert-secondary">
+            <span className="fs-4 d-block">Game Recovery Link</span>
+            <span className="d-block">
+              Need to come back later? Use the link below to resume this game.
+              We suggest saving this link somewhere safe right now, just in case
+              an evil Urchin sneaks up behind you and refreshes your browser.
+            </span>
+            <code className="mt-2 d-inline-block user-select-all">
+              {getRecoveryLink(game)}
+            </code>
+          </div>
+        )}
 
         <div className="footer-wrapper flex-grow-1 d-flex">
           <ul className="footer col d-flex flex-column flex-md-row justify-content-between">

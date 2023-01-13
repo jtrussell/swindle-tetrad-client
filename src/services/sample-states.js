@@ -22,6 +22,7 @@ const EMPTY = {}
 
 const BAN_SAFE_STEAL = {
   id: '73ef23ad-5628-4942-ba47-11fc57907d43',
+  recoveryKey: 'asdf',
   players: [
     {
       name: 'jtrussell',
