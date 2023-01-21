@@ -24,6 +24,7 @@ if (process.env.REACT_APP_WEBSOCKET_URL) {
   const noop = () => {}
   const mockSocket = {
     addEventListener: noop,
+    removeEventListener: noop,
     send: noop,
   }
   window.SWINDLE_TETRAD_SOCKET = mockSocket
