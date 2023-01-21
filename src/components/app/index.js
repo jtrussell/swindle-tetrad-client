@@ -65,6 +65,7 @@ const getRecoveryLink = (game) => {
 
 function App() {
   const [game, setGame] = useState(INITIAL_GAME_STATE)
+  const [isRecoveryLinkVisible, setIsRecoveryLinkVisible] = useState(false)
 
   useEffect(() => {
     const updateStateOnMessage = (event) => {
@@ -174,10 +175,28 @@ function App() {
               Need to come back later? Use the link below to resume this game.
               We suggest saving this link somewhere safe right now, just in case
               an evil Urchin sneaks up behind you and refreshes your browser.
+              Keep in mind that anyone can use this link to resume your session.
             </span>
-            <code className="mt-2 d-inline-block user-select-all">
-              {getRecoveryLink(game)}
-            </code>
+            {isRecoveryLinkVisible ? (
+              <>
+                <button
+                  className="mt-3 d-block btn btn-light"
+                  onClick={() => setIsRecoveryLinkVisible(false)}
+                >
+                  Hide recovery link
+                </button>
+                <code className="mt-3 d-block user-select-all">
+                  {getRecoveryLink(game)}
+                </code>
+              </>
+            ) : (
+              <button
+                className="mt-3 d-block btn btn-light"
+                onClick={() => setIsRecoveryLinkVisible(true)}
+              >
+                Show recovery link
+              </button>
+            )}
           </div>
         )}
 
