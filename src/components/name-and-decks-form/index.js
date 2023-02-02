@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { isValidId, getIdFromUrl } from '../../services/kf-id'
 
+const IS_JOIN = new URL(window.location.href).searchParams.has('gameId')
+
 const validateDecks = (decksBlob) => {
   if (!decksBlob) {
     return false
@@ -36,46 +38,71 @@ function NameAndDecksForm(props) {
     }
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <label className="form-label">Your name</label>
-        <input
-          type="text"
-          className="form-control"
-          value={playerName}
-          onChange={(event) => setPlayerName(event.target.value)}
-        />
+    <>
+      <div className="game-status">
+        <div className="alert alert-info">
+          <div className="fs-4 mb-2">
+            {IS_JOIN ? (
+              <span>
+                You've been invited to a Swindle Tetrad match. Use the form
+                below to join.
+              </span>
+            ) : (
+              <span>Use the form below to start a Swindle Tetrad match.</span>
+            )}
+          </div>
+          <div>
+            <a
+              href="https://www.thefinalswindle.com/p/formats.html"
+              target="_blank"
+              rel="noreferrer"
+            >
+              What is Tetrad?
+            </a>
+          </div>
+        </div>
       </div>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Your name</label>
+          <input
+            type="text"
+            className="form-control"
+            value={playerName}
+            onChange={(event) => setPlayerName(event.target.value)}
+          />
+        </div>
 
-      <div className="mb-3">
-        <label className="form-label">Your decks</label>
-        <textarea
-          value={playerDecksBlob}
-          onChange={(event) => setPlayerDecksBlob(event.target.value)}
-          className="form-control deck-input-textarea"
-          placeholder={
-            'https://decksofkeyforge.com/decks/...\nhttps://decksofkeyforge.com/decks/...\nhttps://www.keyforgegame.com/deck-details/...\nhttps://www.keyforgegame.com/deck-details/...'
-          }
-        />
-      </div>
+        <div className="mb-3">
+          <label className="form-label">Your decks</label>
+          <textarea
+            value={playerDecksBlob}
+            onChange={(event) => setPlayerDecksBlob(event.target.value)}
+            className="form-control deck-input-textarea"
+            placeholder={
+              'https://decksofkeyforge.com/decks/...\nhttps://decksofkeyforge.com/decks/...\nhttps://www.keyforgegame.com/deck-details/...\nhttps://www.keyforgegame.com/deck-details/...'
+            }
+          />
+        </div>
 
-      <div className="mb-3">
-        <button type="submit" className="btn btn-primary">
-          Let's go
-        </button>
+        <div className="mb-3">
+          <button type="submit" className="btn btn-primary">
+            {IS_JOIN ? 'Join game' : "Let's go"}
+          </button>
 
-        <button
-          className="btn"
-          type="button"
-          onClick={() => {
-            setPlayerName('')
-            setPlayerDecksBlob('')
-          }}
-        >
-          Clear
-        </button>
-      </div>
-    </form>
+          <button
+            className="btn"
+            type="button"
+            onClick={() => {
+              setPlayerName('')
+              setPlayerDecksBlob('')
+            }}
+          >
+            Clear
+          </button>
+        </div>
+      </form>
+    </>
   )
 }
 
