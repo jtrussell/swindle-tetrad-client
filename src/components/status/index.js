@@ -12,6 +12,9 @@ const getWaitingForSelection = (selectFor) => {
   return (
     <div className="alert alert-info text-center fs-4">
       Select a deck to <b>{selectForDisplay}</b>.
+      <div style={{ fontSize: 'smaller' }}>
+        Selectable decks are highlighted in gold
+      </div>
     </div>
   )
 }

@@ -30,14 +30,10 @@ html, body {
   text-align: center;
 }
 
-.deck.card.selectable {
-  box-shadow: 0 0 6px  #495057;
-}
-
 .deck.card.selectable:hover {
   cursor: pointer;
   background-color: #fff3cd;
-  border-color: #a1afbe;
+  border-color: #dfbb50;
 }
 
 .deck.card.selectable:hover .deck-houses {
@@ -71,7 +67,7 @@ html, body {
 }
 
 .deck.card.steal {
-  border: 2px solid	#b4a7d6;
+  border-color: #b4a7d6;
 }
 
 .deck.card.steal.preliminary {
@@ -80,6 +76,11 @@ html, body {
 
 .deck.card.steal .deck-status {
   background-color: #d9d2e9;
+}
+
+.deck.card.selectable {
+  box-shadow: 0 0 6px  #dfbb50;
+  border-color: #dfbb50;
 }
 
 ul.decks-list {
@@ -185,4 +186,12 @@ ul.footer {
   padding: 20px 0 0;
   border-top: 1px solid #eee;
   list-style-type: none;
+}
+
+.game-status {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 5em;
 }
