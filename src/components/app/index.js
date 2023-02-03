@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import Deck from '../deck'
 import Status from '../status'
 import PlayerNameAndDecksForm from '../name-and-decks-form'
+import GameRecovery from '../game-recovery'
+import Footer from '../footer'
 import { getPlayerDecks } from '../../services/game'
 import * as gameStates from '../../services/sample-states'
 import './style.css'
@@ -58,14 +60,8 @@ const recoverGameIfNeeded = (game) => {
   return false
 }
 
-const getRecoveryLink = (game) => {
-  const url = window.location.href.replace(/\?.*/, '')
-  return `${url}?game=${game.id}&recoveryKey=${game.recoveryKey}`
-}
-
 function App() {
   const [game, setGame] = useState(INITIAL_GAME_STATE)
-  const [isRecoveryLinkVisible, setIsRecoveryLinkVisible] = useState(false)
 
   useEffect(() => {
     const updateStateOnMessage = (event) => {
@@ -85,6 +81,24 @@ function App() {
         'message',
         updateStateOnMessage
       )
+    }
+  })
+
+  useEffect(() => {
+    const heartbeatInterval = window.setInterval(() => {
+      if (game.id && !game.isDisconnected) {
+        window.SWINDLE_TETRAD_SOCKET.send(
+          JSON.stringify({
+            action: 'heartbeat',
+            payload: {
+              gameId: game.id,
+            },
+          })
+        )
+      }
+    }, 15 * 1000)
+    return () => {
+      window.clearInterval(heartbeatInterval)
     }
   })
 
@@ -108,6 +122,25 @@ function App() {
         them,
       ],
     })
+  }
+
+  if (game.isDisconnected) {
+    return (
+      <div className="app h-100">
+        <div className="container d-flex flex-column h-100">
+          {game.isDisconnected && (
+            <div className="alert alert-warning">
+              <div className="fs-2">Welp...</div>
+              <div>
+                You've been disconnected. Use the recovery link below to get
+                back into your game.
+              </div>
+            </div>
+          )}
+          <GameRecovery game={game} />
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -167,72 +200,8 @@ function App() {
             </div>
           )}
         </div>
-
-        {game.recoveryKey && (
-          <div className="alert alert-secondary">
-            <span className="fs-4 d-block">Game Recovery Link</span>
-            <span className="d-block">
-              Need to come back later? Use the link below to resume this game.
-              We suggest saving this link somewhere safe right now, just in case
-              an evil Urchin sneaks up behind you and refreshes your browser.
-              Keep in mind that anyone can use this link to resume your session.
-            </span>
-            {isRecoveryLinkVisible ? (
-              <>
-                <button
-                  className="mt-3 d-block btn btn-light"
-                  onClick={() => setIsRecoveryLinkVisible(false)}
-                >
-                  Hide recovery link
-                </button>
-                <code className="mt-3 d-block user-select-all">
-                  {getRecoveryLink(game)}
-                </code>
-              </>
-            ) : (
-              <button
-                className="mt-3 d-block btn btn-light"
-                onClick={() => setIsRecoveryLinkVisible(true)}
-              >
-                Show recovery link
-              </button>
-            )}
-          </div>
-        )}
-
-        <div className="footer-wrapper flex-grow-1 d-flex">
-          <ul className="footer col d-flex flex-column flex-md-row justify-content-between">
-            <li>
-              <a
-                href="https://www.thefinalswindle.com/"
-                className="link-info"
-                target="_blank"
-                rel="noreferrer"
-              >
-                The Final Swindle
-              </a>
-              <span className="text-black-50 ps-1 pe-1">&times;</span>
-              <a
-                href="https://sloppylabwork.com/"
-                className="link-info"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Sloppy Labwork
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.thefinalswindle.com/p/formats.html"
-                className="link-info"
-                target="_blank"
-                rel="noreferrer"
-              >
-                About Tetrad and Other Swindle Formats
-              </a>
-            </li>
-          </ul>
-        </div>
+        <GameRecovery game={game} />
+        <Footer />
       </div>
     </div>
   )

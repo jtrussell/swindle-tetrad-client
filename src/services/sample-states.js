@@ -4,8 +4,9 @@
  *  - recoveryKey?: key to recover this game with a new connection
  *  - players: Players[] with length 0-2
  *  - decks: hash of all decks referenced by player properties
- *  - isThinking: boolean - loading, working, whatever
  *  - message: string
+ *  - isDisconnected: true when we are no longer able to make updates to this
+ *    game.
  *
  * Player:
  *  - name: string
@@ -19,6 +20,12 @@
  */
 
 const EMPTY = {}
+
+const DISCONNECTED = {
+  id: '73ef23ad-5628-4942-ba47-11fc57907d43',
+  recoveryKey: 'asdf',
+  isDisconnected: true,
+}
 
 const BAN_SAFE_STEAL = {
   id: '73ef23ad-5628-4942-ba47-11fc57907d43',
@@ -101,4 +108,4 @@ const BAN_SAFE_STEAL = {
   },
 }
 
-export { EMPTY, BAN_SAFE_STEAL }
+export { EMPTY, DISCONNECTED, BAN_SAFE_STEAL }
