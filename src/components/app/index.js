@@ -60,6 +60,11 @@ const recoverGameIfNeeded = (game) => {
   return false
 }
 
+const getJoinLink = (game) => {
+  const url = window.location.href.replace(/\?.*/, '')
+  return `${url}?game=${game.id}`
+}
+
 function App() {
   const [game, setGame] = useState(INITIAL_GAME_STATE)
 
@@ -165,9 +170,7 @@ function App() {
               Check over your decks below, then send your opponent this link to
               join the game:
             </div>
-            <a href={'?game=' + game.id}>
-              {window.location.href + '?game=' + game.id}
-            </a>
+            <a href={getJoinLink(game)}>{getJoinLink(game)}</a>
           </div>
         )}
 
