@@ -176,6 +176,7 @@ function App() {
             </div>
           )}
           <GameRecovery game={game} />
+          <Footer></Footer>
         </div>
       </div>
     )
