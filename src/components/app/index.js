@@ -39,11 +39,30 @@ const selectDeck = (gameId, selectFor, deckId) => {
   )
 }
 
+const getRecoveryKey = () => {
+  const url = new URL(window.location.href)
+  const queryParamRecoveryKey = url.searchParams.get('recoveryKey')
+  if (queryParamRecoveryKey) {
+    return queryParamRecoveryKey
+  }
+
+  const queryParamGameId = url.searchParams.get('game')
+  const storageKeyPair = window.localStorage.getItem('recoveryKey')
+  if (storageKeyPair?.length) {
+    const [gameId, recoveryKey] = storageKeyPair.split('::')
+    if (gameId === queryParamGameId && recoveryKey) {
+      return recoveryKey
+    }
+  }
+
+  return null
+}
+
 const recoverGameIfNeeded = (game) => {
   if (!game.recoveryKey) {
     const url = new URL(window.location.href)
     const gameId = url.searchParams.get('game')
-    const recoveryKey = url.searchParams.get('recoveryKey')
+    const recoveryKey = getRecoveryKey()
     if (gameId && recoveryKey) {
       window.SWINDLE_TETRAD_SOCKET.send(
         JSON.stringify({
@@ -76,6 +95,20 @@ function App() {
         ...updateData.game,
       }
       setGame(nextGameState)
+      try {
+        if (nextGameState.recoveryKey) {
+          const gameId = nextGameState.id
+          const recoveryKey = nextGameState.recoveryKey
+          window.localStorage.setItem(
+            `recoveryKey`,
+            `${gameId}::${recoveryKey}`
+          )
+          window.history.pushState(null, null, `?game=${gameId}`)
+        }
+      } catch (err) {
+        console.error('Failed to set a recovery key in storage')
+        console.error(err)
+      }
     }
     window.SWINDLE_TETRAD_SOCKET.addEventListener(
       'message',

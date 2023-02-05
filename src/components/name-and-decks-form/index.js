@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { isValidId, getIdFromUrl } from '../../services/kf-id'
 
-const IS_JOIN = new URL(window.location.href).searchParams.has('gameId')
+const IS_JOIN = new URL(window.location.href).searchParams.has('game')
 
 const validateDecks = (decksBlob) => {
   if (!decksBlob) {
