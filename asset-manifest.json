@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/swindle-tetrad-client/static/css/main.99b7e49d.css",
-    "main.js": "/swindle-tetrad-client/static/js/main.2cdc9b9f.js",
+    "main.js": "/swindle-tetrad-client/static/js/main.e8bd92f1.js",
     "static/media/saurian.png": "/swindle-tetrad-client/static/media/saurian.f9bf41ab44a3007622e5.png",
     "static/media/brobnar.png": "/swindle-tetrad-client/static/media/brobnar.6102a18bd7b2be4b01f2.png",
     "static/media/untamed.png": "/swindle-tetrad-client/static/media/untamed.abaf4774d12f318875cf.png",
@@ -15,10 +15,10 @@
     "static/media/staralliance.png": "/swindle-tetrad-client/static/media/staralliance.aadbb21e50f3efa6797c.png",
     "index.html": "/swindle-tetrad-client/index.html",
     "main.99b7e49d.css.map": "/swindle-tetrad-client/static/css/main.99b7e49d.css.map",
-    "main.2cdc9b9f.js.map": "/swindle-tetrad-client/static/js/main.2cdc9b9f.js.map"
+    "main.e8bd92f1.js.map": "/swindle-tetrad-client/static/js/main.e8bd92f1.js.map"
   },
   "entrypoints": [
     "static/css/main.99b7e49d.css",
-    "static/js/main.2cdc9b9f.js"
+    "static/js/main.e8bd92f1.js"
   ]
 }
