@@ -185,6 +185,8 @@ function App() {
   return (
     <div className="app h-100">
       <div className="container d-flex flex-column h-100">
+        <Status game={game}></Status>
+
         {!game.players?.length && (
           <div className="row flex">
             <div className="col-lg-6 ms-auto me-auto">
@@ -207,8 +209,6 @@ function App() {
             <a href={getJoinLink(game)}>{getJoinLink(game)}</a>
           </div>
         )}
-
-        <Status game={game}></Status>
 
         <div className="row mb-4">
           {myDecks?.length > 0 && (

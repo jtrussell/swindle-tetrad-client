@@ -22,6 +22,14 @@ const getWaitingForSelection = (selectFor) => {
 function Status(props) {
   const { game } = props
 
+  if (game.message) {
+    return (
+      <div className={`alert alert-${game.message.type} text-center fs-4`}>
+        {game.message.text}
+      </div>
+    )
+  }
+
   const myDecks = getPlayerDecks(game, 0)
   const theirDecks = getPlayerDecks(game, 1)
   const mySelectFor = myDecks.find((x) => x.selectFor)?.selectFor
@@ -38,6 +46,11 @@ function Status(props) {
 
   return (
     <div className="game-status">
+      {game.message && (
+        <div className={`alert alert-${game.message.type} text-center fs-4`}>
+          {game.message.text}
+        </div>
+      )}
       {selectFor ? (
         getWaitingForSelection(selectFor)
       ) : (
