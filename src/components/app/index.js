@@ -140,6 +140,35 @@ function App() {
     }
   })
 
+  useEffect(() => {
+    const removeSelectionToConfirmOnClickOutsideDeck = (event) => {
+      if (!game.selectionToConfirm) {
+        return
+      }
+      try {
+        const isClickInDeck = Boolean(event.target.closest('.deck.card'))
+        if (!isClickInDeck) {
+          setGame({
+            ...game,
+            selectionToConfirm: null,
+          })
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    document.addEventListener(
+      'mousedown',
+      removeSelectionToConfirmOnClickOutsideDeck
+    )
+    return () => {
+      document.removeEventListener(
+        'mousedown',
+        removeSelectionToConfirmOnClickOutsideDeck
+      )
+    }
+  })
+
   if (recoverGameIfNeeded(game)) {
     return 'Hang on... restarting the Nintendo...'
   }
@@ -148,18 +177,26 @@ function App() {
   const theirDecks = getPlayerDecks(game, 1)
 
   const handleSelect = (selectFor, deckId) => {
-    selectDeck(game.id, selectFor, deckId)
-    const [me, them] = game.players
-    setGame({
-      ...game,
-      players: [
-        {
-          ...me,
-          [selectFor]: deckId,
-        },
-        them,
-      ],
-    })
+    if (game.selectionToConfirm === deckId) {
+      selectDeck(game.id, selectFor, deckId)
+      const [me, them] = game.players
+      setGame({
+        ...game,
+        selectionToConfirm: null,
+        players: [
+          {
+            ...me,
+            [selectFor]: deckId,
+          },
+          them,
+        ],
+      })
+    } else {
+      setGame({
+        ...game,
+        selectionToConfirm: deckId,
+      })
+    }
   }
 
   if (game.isDisconnected) {

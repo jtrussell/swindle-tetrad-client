@@ -10,6 +10,7 @@ function Deck(props) {
     isSafe,
     isStolen,
     isPreliminarySteal,
+    isSelectionToConfirm,
     isSelectable,
     selectFor,
     isDeck1,
@@ -38,6 +39,7 @@ function Deck(props) {
     'card',
     status,
     isPreliminarySteal && 'preliminary',
+    isSelectionToConfirm && 'selection-to-confirm',
     isSelectable && 'selectable',
   ].join(' ')
 

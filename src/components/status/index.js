@@ -1,6 +1,6 @@
 import { getPlayerDecks } from '../../services/game'
 
-const getWaitingForSelection = (selectFor) => {
+const getWaitingForSelection = (selectFor, isAwaitingConfirmation) => {
   const selectForDisplay = {
     ban: 'ban',
     safe: 'save',
@@ -13,7 +13,9 @@ const getWaitingForSelection = (selectFor) => {
     <div className="alert alert-info text-center fs-4">
       Select a deck to <b>{selectForDisplay}</b>.
       <div style={{ fontSize: 'smaller' }}>
-        Selectable decks are highlighted in gold
+        {isAwaitingConfirmation
+          ? 'Click again to lock in your selection. No take backs.'
+          : 'Selectable decks are highlighted in gold'}
       </div>
     </div>
   )
@@ -52,7 +54,7 @@ function Status(props) {
         </div>
       )}
       {selectFor ? (
-        getWaitingForSelection(selectFor)
+        getWaitingForSelection(selectFor, Boolean(game.selectionToConfirm))
       ) : (
         <div className="alert alert-info text-center fs-4">
           Waiting for opponent to make a selection.

@@ -30,20 +30,6 @@ html, body {
   text-align: center;
 }
 
-.deck.card.selectable:hover {
-  cursor: pointer;
-  background-color: #fff3cd;
-  border-color: #dfbb50;
-}
-
-.deck.card.selectable:hover .deck-houses {
-  background-color: #ffe69c;
-}
-
-.deck.card.selectable:hover .deck-status {
-  background-color: #dfbb50;
-}
-
 .deck-status {
   color: rgba(0, 0, 0, 0.3)
 }
@@ -78,6 +64,28 @@ html, body {
   background-color: #d9d2e9;
 }
 
+.deck.card.selection-to-confirm,
+.deck.card.selectable:hover {
+  cursor: pointer;
+  background-color: #fff3cd;
+  border-color: #dfbb50;
+}
+
+.deck.card.selection-to-confirm .deck-houses,
+.deck.card.selectable:hover .deck-houses {
+  background-color: #ffe69c;
+}
+
+.deck.card.selection-to-confirm .deck-status,
+.deck.card.selectable:hover .deck-status {
+  background-color: #dfbb50;
+}
+
+.deck.card.selection-to-confirm {
+  border-style: dotted;
+}
+
+.deck.card.selection-to-confirm,
 .deck.card.selectable {
   box-shadow: 0 0 6px  #dfbb50;
   border-color: #dfbb50;
@@ -91,10 +99,6 @@ ul.decks-list {
 
 .my-decks-list .deck > .row {
   flex-direction: row-reverse;
-}
-
-.deck-actions__game-number::before {
-  content: "G ";
 }
 
 .deck-details {

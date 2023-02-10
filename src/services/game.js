@@ -54,6 +54,7 @@ const getPlayerDecks = (game, ixPlayer) => {
     (ixPlayer === 0 && opponent?.deck2 && !player.deck3 && 'deck3')
 
   return playerDecks.map((deckId) => {
+    const isSelectionToConfirm = deckId === game.selectionToConfirm
     const isBanned = opponent?.ban === deckId
     const isSafe = player.safe === deckId
     const isDeck1 = player.deck1 === deckId
@@ -87,6 +88,7 @@ const getPlayerDecks = (game, ixPlayer) => {
       ...game.decks[deckId],
       selectFor,
       isSelectable,
+      isSelectionToConfirm,
       isBanned,
       isSafe,
       isStolen,
