@@ -50,8 +50,8 @@ const getPlayerDecks = (game, ixPlayer) => {
     (ixPlayer === 0 && opponent?.ban && !player.safe && 'safe') ||
     (ixPlayer === 1 && player.safe && !opponent?.steal && 'steal') ||
     (ixPlayer === 0 && opponent?.steal && !player.deck1 && 'deck1') ||
-    (ixPlayer === 0 && opponent?.deck1 && !player.deck2 && 'deck2') ||
-    (ixPlayer === 0 && opponent?.deck2 && !player.deck3 && 'deck3')
+    (ixPlayer === 0 && player.deck1 && !player.deck2 && 'deck2') ||
+    (ixPlayer === 0 && player.deck2 && !player.deck3 && 'deck3')
 
   return playerDecks.map((deckId) => {
     const isSelectionToConfirm = deckId === game.selectionToConfirm
